@@ -126,45 +126,6 @@ function App() {
     ));
   };
 
-  const boardBounds = useMemo(() => {
-    if (!boardPieces || boardPieces.length === 0) {
-      return {
-        minLeft: isDesktop ? -2000 : -1000,
-        maxRight: isDesktop ? 8000 : 4000,
-      };
-    }
-
-    let minLeft = Infinity;
-    let maxRight = -Infinity;
-
-    boardPieces.forEach((piece) => {
-      const previousBoardPiece = boardPieces.find(
-        (bp) => bp.l === piece.l - 1,
-      );
-
-      const left = calculateLeft(
-        previousBoardPiece,
-        piece.l,
-        piece.c,
-        isDesktop,
-        BP_SHIFT_HORIZONTAL_TRINCA,
-      );
-
-      const pieceRight = left + piece.size * BP_SHIFT_HORIZONTAL;
-      minLeft = Math.min(minLeft, left);
-      maxRight = Math.max(maxRight, pieceRight);
-    });
-
-    if (!isFinite(minLeft) || !isFinite(maxRight)) {
-      return {
-        minLeft: isDesktop ? -2000 : -1000,
-        maxRight: isDesktop ? 8000 : 4000,
-      };
-    }
-
-    return { minLeft, maxRight };
-  }, [boardPieces, isDesktop]);
-
   const renderAlignmentLines = () => {
     const linePositions = [0, ...shiftedTowerPositions].filter((value) =>
       Number.isFinite(value),
