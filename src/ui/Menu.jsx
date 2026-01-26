@@ -16,7 +16,7 @@ export const Menu = ({
         top: "20px",
         right: "20px",
         zIndex: 9999,
-        backgroundColor: "rgb(0, 0, 0)",
+        backgroundColor: "#1d0000",
         borderRadius: "8px",
         padding: "20px",
         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",

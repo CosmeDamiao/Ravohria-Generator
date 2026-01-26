@@ -86,7 +86,7 @@ export const Drawer = ({
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            backgroundColor: "#1d0000",
             zIndex: 9998,
             transition: "opacity 0.3s ease",
           }}
@@ -102,7 +102,7 @@ export const Drawer = ({
           left: 0,
           right: 0,
           zIndex: 9999,
-          backgroundColor: "rgb(0, 0, 0)",
+          backgroundColor: "#1d0000",
           borderRadius: "16px 16px 0 0",
           boxShadow: "0 -4px 32px rgba(0, 0, 0, 0.1)",
           backdropFilter: "blur(10px)",
@@ -130,7 +130,8 @@ export const Drawer = ({
             padding: "20px 0",
             touchAction: "none",
             zIndex: 10,
-            backgroundColor: "rgb(0, 0, 0)",
+            backgroundColor: "#1d0000",
+            borderRadius: "16px 16px 0 0",
           }}
           onMouseDown={(e) => handleDragStart(e.clientY, e.target)}
           onMouseMove={(e) => handleDragMove(e.clientY)}
@@ -145,7 +146,7 @@ export const Drawer = ({
               width: "40px",
               height: "4px",
               borderRadius: "2px",
-              backgroundColor: "#ccc",
+              backgroundColor: "#969696",
             }}
           />
         </div>
