@@ -1,11 +1,17 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { MapInteractionCSS } from "react-map-interaction";
 import { motion } from "framer-motion";
 import { Piece } from "./pieces/Piece.jsx";
 import { SidePiece } from "./pieces/SidePiece.jsx";
 import { ZoneBackgroundDebug } from "./pieces/ZoneBackgroundDebug.jsx";
 import { mapGenerator, calculateTowerPositions } from "./game/mapGenerator.js";
+import {
+  BP_SHIFT_VERTICAL,
+  BP_SHIFT_HORIZONTAL,
+  BP_SHIFT_HORIZONTAL_TRINCA,
+} from "./pieces/constants.js";
+import { calculateLeft, calculateTop } from "./helpers";
 import { Menu } from "./ui/Menu.jsx";
 import { AboutMe } from "./ui/AboutMe.jsx";
 import { difficultiesConfig } from "./pieces/difficulties.js";
@@ -50,7 +56,7 @@ function App() {
       <motion.div
         key={`${boardPiece.imgUrl}_${index}`}
         animate={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
-        initial={{ scale: 0 }}
+        initial={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
         transition={{ duration: 0.5 }}
       >
         <Piece
@@ -78,7 +84,7 @@ function App() {
         <motion.div
           key={`zone_bg_${index}`}
           animate={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
-          initial={{ scale: 0 }}
+          initial={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
           transition={{ duration: 0.5 }}
           style={{ zIndex: 0 }}
         >
@@ -106,7 +112,7 @@ function App() {
       <motion.div
         key={`${piece.alt}_${index}`}
         animate={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
-        initial={{ scale: 0 }}
+        initial={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
         transition={{ duration: 0.5 }}
       >
         <SidePiece
@@ -120,6 +126,80 @@ function App() {
     ));
   };
 
+  const boardBounds = useMemo(() => {
+    if (!boardPieces || boardPieces.length === 0) {
+      return {
+        minLeft: isDesktop ? -2000 : -1000,
+        maxRight: isDesktop ? 8000 : 4000,
+      };
+    }
+
+    let minLeft = Infinity;
+    let maxRight = -Infinity;
+
+    boardPieces.forEach((piece) => {
+      const previousBoardPiece = boardPieces.find(
+        (bp) => bp.l === piece.l - 1,
+      );
+
+      const left = calculateLeft(
+        previousBoardPiece,
+        piece.l,
+        piece.c,
+        isDesktop,
+        BP_SHIFT_HORIZONTAL_TRINCA,
+      );
+
+      const pieceRight = left + piece.size * BP_SHIFT_HORIZONTAL;
+      minLeft = Math.min(minLeft, left);
+      maxRight = Math.max(maxRight, pieceRight);
+    });
+
+    if (!isFinite(minLeft) || !isFinite(maxRight)) {
+      return {
+        minLeft: isDesktop ? -2000 : -1000,
+        maxRight: isDesktop ? 8000 : 4000,
+      };
+    }
+
+    return { minLeft, maxRight };
+  }, [boardPieces, isDesktop]);
+
+  const renderAlignmentLines = () => {
+    const linePositions = [0, ...shiftedTowerPositions].filter((value) =>
+      Number.isFinite(value),
+    );
+    const lineHeight = 20;
+
+    return linePositions.map((lineValue, index) => {
+      const top =
+        calculateTop(lineValue - 1, isDesktop, BP_SHIFT_VERTICAL) +
+        BP_SHIFT_VERTICAL / 2 -
+        lineHeight / 2;
+
+      return (
+        <motion.div
+          key={`alignment_line_${index}_${lineValue}`}
+          animate={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
+          initial={{ x: isDesktop ? 2000 : 600, scale: isDesktop ? 1 : 0.8 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              left: "-50000px",
+              top: `${top}px`,
+              width: "100000px",
+              height: `${lineHeight}px`,
+              background: "rgba(194, 4, 4, 0.67)",
+              zIndex: 0,
+            }}
+          />
+        </motion.div>
+      );
+    });
+  };
+
   const ConfigRendererComponent = isDesktop ? Menu : Drawer;
 
   return (
@@ -128,6 +208,7 @@ function App() {
         value={mapState}
         onChange={(value) => setMapState(value)}
       >
+        {renderAlignmentLines()}
         {renderZoneBackgrounds()}
         {renderBoardPieces()}
         {renderTowersAndSentinels()}
