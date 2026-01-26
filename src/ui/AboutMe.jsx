@@ -19,7 +19,7 @@ export const AboutMe = () => {
           justifyContent: "space-between",
           alignItems: "center",
           paddingBottom: isCollapsed ? "0" : "8px",
-          borderBottom: isCollapsed ? "none" : "1px solid #e0e0e0",
+          borderBottom: isCollapsed ? "none" : "1px solid #710000",
           cursor: "pointer",
         }}
         onClick={() => setIsCollapsed(!isCollapsed)}
@@ -29,6 +29,7 @@ export const AboutMe = () => {
             style={{
               fontSize: "18px",
               transition: "transform 0.2s ease",
+              color: "#929292",
               transform: isCollapsed ? "rotate(-90deg)" : "rotate(0deg)",
             }}
           >
@@ -38,7 +39,7 @@ export const AboutMe = () => {
             style={{
               fontSize: "16px",
               fontWeight: "600",
-              color: "#333",
+              color: "#929292",
               margin: 0,
             }}
           >
@@ -55,7 +56,7 @@ export const AboutMe = () => {
             flexDirection: "column",
             gap: "12px",
             padding: "8px 0",
-            color: "#555",
+            color: "#7d7d7d",
             fontSize: "14px",
             lineHeight: "1.6",
           }}
@@ -80,7 +81,7 @@ export const AboutMe = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                color: "#0066cc",
+                color: "#258cf4",
                 textDecoration: "none",
                 fontWeight: "500",
               }}

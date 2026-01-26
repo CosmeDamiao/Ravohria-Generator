@@ -102,7 +102,7 @@ export const Drawer = ({
           left: 0,
           right: 0,
           zIndex: 9999,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "rgb(0, 0, 0)",
           borderRadius: "16px 16px 0 0",
           boxShadow: "0 -4px 32px rgba(0, 0, 0, 0.1)",
           backdropFilter: "blur(10px)",
@@ -130,7 +130,7 @@ export const Drawer = ({
             padding: "20px 0",
             touchAction: "none",
             zIndex: 10,
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "rgb(0, 0, 0)",
           }}
           onMouseDown={(e) => handleDragStart(e.clientY, e.target)}
           onMouseMove={(e) => handleDragMove(e.clientY)}
@@ -165,7 +165,7 @@ export const Drawer = ({
               style={{
                 fontSize: "14px",
                 fontWeight: "500",
-                color: "#666",
+                color: "#f74b38",
               }}
             >
               Difficulty
@@ -177,8 +177,9 @@ export const Drawer = ({
                 padding: "10px 12px",
                 fontSize: "14px",
                 borderRadius: "8px",
-                border: "1px solid #e0e0e0",
-                backgroundColor: "#fff",
+                border: "2px solid #8B2323",
+                backgroundColor: "#3D1515",
+                color: "#fff",
                 cursor: "pointer",
                 outline: "none",
                 transition: "all 0.2s ease",
@@ -201,18 +202,18 @@ export const Drawer = ({
               fontSize: "16px",
               fontWeight: "600",
               color: "#fff",
-              backgroundColor: isEditingConfig ? "#ccc" : "#4CAF50",
+              backgroundColor: isEditingConfig ? "#c5250c" : "#a51707",
               border: "none",
               borderRadius: "8px",
               cursor: isEditingConfig ? "not-allowed" : "pointer",
               transition: "all 0.2s ease",
               boxShadow: isEditingConfig
                 ? "none"
-                : "0 2px 8px rgba(76, 175, 80, 0.3)",
+                : "0 2px 8px rgba(255, 107, 91, 0.3)",
               opacity: isEditingConfig ? 0.6 : 1,
             }}
           >
-            Generate
+            GENERATE
           </button>
 
           {/* Collapsible Content - Only visible when open */}
@@ -223,7 +224,7 @@ export const Drawer = ({
                 flexDirection: "column",
                 gap: "16px",
                 paddingTop: "8px",
-                borderTop: "1px solid #e0e0e0",
+                borderTop: "1px solid rgba(255, 255, 255, 0.2)",
                 animation: "slideIn 0.3s ease",
               }}
             >

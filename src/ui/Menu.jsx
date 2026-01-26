@@ -16,8 +16,8 @@ export const Menu = ({
         top: "20px",
         right: "20px",
         zIndex: 9999,
-        backgroundColor: "rgba(255, 255, 255, 0.95)",
-        borderRadius: "16px",
+        backgroundColor: "rgb(0, 0, 0)",
+        borderRadius: "8px",
         padding: "20px",
         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
         backdropFilter: "blur(10px)",
@@ -35,25 +35,25 @@ export const Menu = ({
           position: "relative",
         }}
       >
-        {/* Header */}
+        {/* Header 
         <div
           style={{
             fontSize: "20px",
             fontWeight: "600",
-            color: "#1a1a1a",
+            color: "#ffffff",
             marginBottom: "4px",
           }}
         >
           Board Generator
-        </div>
+        </div> */}
 
         {/* Difficulty Selector */}
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <label
             style={{
-              fontSize: "14px",
+              fontSize: "16px",
               fontWeight: "500",
-              color: "#666",
+              color: "#f74b38",
             }}
           >
             Difficulty
@@ -62,20 +62,24 @@ export const Menu = ({
             value={difficulty}
             onChange={(e) => onDifficultyChange(Number(e.target.value))}
             style={{
-              padding: "10px 12px",
-              fontSize: "14px",
+              padding: "12px",
+              fontSize: "15px",
+              fontWeight: "500",
               borderRadius: "8px",
-              border: "1px solid #e0e0e0",
-              backgroundColor: "#fff",
+              border: "2px solid #8B2323",
+              backgroundColor: "#3D1515",
+              color: "#fff",
               cursor: "pointer",
               outline: "none",
               transition: "all 0.2s ease",
             }}
             onMouseEnter={(e) => {
-              e.target.style.borderColor = "#4CAF50";
+              e.target.style.borderColor = "#8B2323";
+              e.target.style.backgroundColor = "#4D1F1F";
             }}
             onMouseLeave={(e) => {
-              e.target.style.borderColor = "#e0e0e0";
+              e.target.style.borderColor = "#8B2323";
+              e.target.style.backgroundColor = "#3D1515";
             }}
           >
             {Object.entries(difficultiesConfig).map(([value, config]) => (
@@ -95,29 +99,29 @@ export const Menu = ({
           disabled={isEditingConfig}
           style={{
             padding: "12px 24px",
-            fontSize: "16px",
+            fontSize: "15px",
             fontWeight: "600",
             color: "#fff",
-            backgroundColor: isEditingConfig ? "#ccc" : "#4CAF50",
+            backgroundColor: isEditingConfig ? "#c5250c" : "#a51707",
             border: "none",
             borderRadius: "8px",
             cursor: isEditingConfig ? "not-allowed" : "pointer",
             transition: "all 0.2s ease",
-            boxShadow: isEditingConfig ? "none" : "0 2px 8px rgba(76, 175, 80, 0.3)",
+            boxShadow: isEditingConfig ? "none" : "0 2px 8px rgba(255, 107, 91, 0.3)",
             opacity: isEditingConfig ? 0.6 : 1,
           }}
           onMouseEnter={(e) => {
             if (!isEditingConfig) {
-              e.target.style.backgroundColor = "#45a049";
+              e.target.style.backgroundColor = "#a51707";
               e.target.style.transform = "translateY(-2px)";
-              e.target.style.boxShadow = "0 4px 12px rgba(76, 175, 80, 0.4)";
+              e.target.style.boxShadow = "0 4px 12px rgba(255, 107, 91, 0.4)";
             }
           }}
           onMouseLeave={(e) => {
             if (!isEditingConfig) {
-              e.target.style.backgroundColor = "#4CAF50";
+              e.target.style.backgroundColor = "#c5250c";
               e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "0 2px 8px rgba(76, 175, 80, 0.3)";
+              e.target.style.boxShadow = "0 2px 8px rgba(255, 107, 91, 0.3)";
             }
           }}
           onMouseDown={(e) => {
@@ -126,7 +130,7 @@ export const Menu = ({
             }
           }}
         >
-          Generate
+          GENERATE
         </button>
       </div>
     </div>
