@@ -1,17 +1,13 @@
 import "./App.css";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { MapInteractionCSS } from "react-map-interaction";
 import { motion } from "framer-motion";
 import { Piece } from "./pieces/Piece.jsx";
 import { SidePiece } from "./pieces/SidePiece.jsx";
 import { ZoneBackgroundDebug } from "./pieces/ZoneBackgroundDebug.jsx";
 import { mapGenerator, calculateTowerPositions } from "./game/mapGenerator.js";
-import {
-  BP_SHIFT_VERTICAL,
-  BP_SHIFT_HORIZONTAL,
-  BP_SHIFT_HORIZONTAL_TRINCA,
-} from "./pieces/constants.js";
-import { calculateLeft, calculateTop } from "./helpers";
+import { BP_SHIFT_VERTICAL } from "./pieces/constants.js";
+import { calculateTop } from "./helpers";
 import { Menu } from "./ui/Menu.jsx";
 import { AboutMe } from "./ui/AboutMe.jsx";
 import { difficultiesConfig } from "./pieces/difficulties.js";
