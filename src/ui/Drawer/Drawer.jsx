@@ -86,7 +86,7 @@ export const Drawer = ({
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: "#1d0000",
+            backgroundColor: "rgba(29, 0, 0, 0.14)",
             zIndex: 9998,
             transition: "opacity 0.3s ease",
           }}
